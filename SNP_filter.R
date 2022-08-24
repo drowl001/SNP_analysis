@@ -42,14 +42,7 @@ File <- cbind(C_name, C_POS, Af)
 #Filter the dataframe by summing the number of missing data. Keep only rows/sites with not more than 8 out of the total 24 samples with missing data. i.e only keep sites with at least 67% data
 AF <- File[rowSums(File == ".") <= 8, ]
 
-#Compute the new Alternate allele frequencies by dividing the number Alt alleles by the total number alleles (Ref+Alt) accross the site (24 samples)
-Alt <- rowSums(AF == 1)
-Ref<- rowSums(AF == 0)
-AN <- Alt + Ref
-EC <- Alt/AN 
-Allele_Frequency<-round(EC, digits = 3)
-
 #Generate a subset file (To be used to subset the original VCF file to retain the filtered SNPs only in a new VCF file for downstream analyses) 
-Final_file<- cbind(AF, Allele_Frequency)
+Final_file<- data.frame(AF)
 subset_file <- Final_file[,1:2]
 write.table(subset_file, file = "vcf_subset_file.txt", quote=FALSE, col.names = FALSE, row.names = F)
