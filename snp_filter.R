@@ -53,5 +53,3 @@ Allele_Frequency<-round(EC, digits = 3)
 Final_file<- cbind(AF, Allele_Frequency)
 subset_file <- Final_file[,1:2]
 write.table(subset_file, file = "vcf_subset_file.txt", quote=FALSE, col.names = FALSE, row.names = F)
-
-
